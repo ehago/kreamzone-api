@@ -1,4 +1,10 @@
 spring:
-    banner:
-        charset: UTF-8
-        location: classpath:banner.txt
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: ENC(Lvq8n76c/hHR57W0kui4Zzg1vSVnwPBq6LnhcCFXSKKCE5UYDGgt/NSJ78YjxhRzCpBHXwjv2tntHe/oXUbf0Q==)
+        username: ENC(X0I8yRhkGBH4QnhDvak1kRI4AqQnGqvA)
+        password: ENC(L7ao6FM88V7Xgtf8X5YlEELsw5EA7OPN)
+    jpa:
+        properties:
+            hibernate:
+                format-sql: true

@@ -32,7 +32,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
     implementation group: 'com.querydsl', name: 'querydsl-apt', version: '4.4.0'
-    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
