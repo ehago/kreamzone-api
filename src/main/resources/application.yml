@@ -1,10 +1,28 @@
 spring:
+    devtools:
+        livereload:
+            enabled: true
     datasource:
         driver-class-name: org.postgresql.Driver
         url: ENC(Y163CTUnIqK2deK/SBNbmRO3EOlFmmf21bqEsBMUIhAaKeOfN74rZ6rTH8hEu4C+Y/iGiHR7JNNkKCPdEprYQQ==)
         username: ENC(vjN4t4sGv6WKsNu+rWO/y3xB3cV9vg8+)
         password: ENC(iGYbYIj/tmfZShAopYp8qnP9Tl21tqI2)
     jpa:
+        generate-ddl: false
+        open-in-view: false
+        show-sql: true
+        hibernate:
+            ddl-auto: validate
         properties:
             hibernate:
-                format-sql: true
+                show_sql: true
+                format_sql: true
+                use_sql_comments: true
+
+logging:
+    level:
+        org:
+            hibernate:
+                type:
+                    descriptor:
+                        sql: trace
