@@ -1,17 +1,18 @@
 package com.ehago.kreamzone.entity;
 
+import com.ehago.kreamzone.enumeration.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table
+@Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member {
@@ -22,34 +23,26 @@ public class Member {
     private Long memberId;
 
     @OneToMany(mappedBy = "member")
-    private ArrayList<Card> cards = new ArrayList<>();
+    private List<Card> cards = new ArrayList<>();
 
-    @OneToOne(name = "",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "member")
     private Account account;
 
-    @Column(nullable = false, updatable = false)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column
     private int size;
 
-    @Column
     private int point;
 
     @Enumerated(EnumType.STRING)
-    @Column
     private Role role;
 
-    @Column
     private String emailCheckToken;
 
-    @Column
     private LocalDate emailCheckTokenGeneratedAt;
 
     @Builder

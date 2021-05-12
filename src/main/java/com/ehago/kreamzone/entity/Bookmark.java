@@ -11,29 +11,25 @@ import javax.persistence.*;
 @Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Card extends BaseTime {
+public class Bookmark {
 
     @Id
     @GeneratedValue
-    private Long cardId;
+    private Long bookmarkId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String isDefault;
-
-    private String cardNum;
-
-    private String company;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @Builder
-    private Card(Long cardId, Member member, String isDefault, String cardNum, String company) {
-        this.cardId = cardId;
+    private Bookmark(Long bookmarkId, Member member, Item item) {
+        this.bookmarkId = bookmarkId;
         this.member = member;
-        this.isDefault = isDefault;
-        this.cardNum = cardNum;
-        this.company = company;
+        this.item = item;
     }
 
 }

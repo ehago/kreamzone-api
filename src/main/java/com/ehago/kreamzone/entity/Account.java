@@ -1,39 +1,30 @@
 package com.ehago.kreamzone.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Entity
-@Table
+@Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Account extends BaseTime {
-    
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private Long accountId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(nullable = false)
     private String accountNum;
 
-    @Column(nullable = false, length = 3)
     private String bankCode;
 
-    @Column(nullable = false)
     private String holderName;
 
     @Builder
