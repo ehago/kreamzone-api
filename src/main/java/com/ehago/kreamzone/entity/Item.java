@@ -12,14 +12,14 @@ import java.time.LocalDate;
 @Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Item {
+public class Item extends BaseTime {
 
     @Id
     @GeneratedValue
     private Long itemId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_item_brand"))
     private Brand brand;
 
     private String name;

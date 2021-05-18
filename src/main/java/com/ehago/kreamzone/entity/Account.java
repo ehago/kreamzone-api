@@ -18,7 +18,7 @@ public class Account extends BaseTime {
     private Long accountId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_account_member"))
     private Member member;
 
     private String accountNum;

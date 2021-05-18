@@ -5,22 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Brand {
+public class Brand extends BaseTime {
 
     @Id
     @GeneratedValue
     private Long brandId;
-
-    @OneToMany(mappedBy = "brand")
-    private List<Item> items = new ArrayList<>();
 
     private String name;
 
@@ -29,9 +27,8 @@ public class Brand {
     private String background;
 
     @Builder
-    private Brand(Long brandId, ArrayList<Item> items, String name, String image, String background) {
+    private Brand(Long brandId, String name, String image, String background) {
         this.brandId = brandId;
-        this.items = items;
         this.name = name;
         this.image = image;
         this.background = background;

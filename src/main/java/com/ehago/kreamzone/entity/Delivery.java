@@ -19,7 +19,7 @@ public class Delivery extends BaseTime {
     private Long deliveryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_delivery_member"))
     private Member member;
 
     private String isDefault;

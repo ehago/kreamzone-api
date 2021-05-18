@@ -18,7 +18,7 @@ public class Card extends BaseTime {
     private Long cardId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_card_member"))
     private Member member;
 
     private String isDefault;
