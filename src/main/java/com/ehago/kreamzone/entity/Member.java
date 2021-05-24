@@ -15,7 +15,7 @@ import java.util.List;
 @Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Member {
+public class Member extends BaseTime {
 
     @Id
     @GeneratedValue
@@ -34,6 +34,8 @@ public class Member {
 
     private String name;
 
+    private String profileImage;
+
     private int size;
 
     private int point;
@@ -46,12 +48,14 @@ public class Member {
     private LocalDate emailCheckTokenGeneratedAt;
 
     @Builder
-    private Member(Long memberId, ArrayList<Card> cards, String email, String password, String name, int size, int point, Role role, String emailCheckToken, LocalDate emailCheckTokenGeneratedAt) {
+    private Member(Long memberId, List<Card> cards, Account account, String email, String password, String name, String profileImage, int size, int point, Role role, String emailCheckToken, LocalDate emailCheckTokenGeneratedAt) {
         this.memberId = memberId;
         this.cards = cards;
+        this.account = account;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.profileImage = profileImage;
         this.size = size;
         this.point = point;
         this.role = role;

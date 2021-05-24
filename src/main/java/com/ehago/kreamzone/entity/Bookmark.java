@@ -11,18 +11,18 @@ import javax.persistence.*;
 @Table(schema = "kream")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Bookmark {
+public class Bookmark extends BaseTime {
 
     @Id
     @GeneratedValue
     private Long bookmarkId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_bookmark_member"))
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(name = "fk_bookmark_item"))
     private Item item;
 
     @Builder
