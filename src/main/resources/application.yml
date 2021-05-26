@@ -24,8 +24,24 @@ spring:
                 format_sql: true
                 use_sql_comments: true
 
+cloud:
+   aws:
+       s3:
+           bucket: ENC(dXzoDfTMqaBLOi0HPXWyT2l2kslSN8ME)
+       region:
+           static: ap-northeast-2
+       stack:
+           auto: false
+       credentials:
+           accessKey: ENC(z5Cmrlnpa3wQ3+zqAFxbGm2h+XYD76hwlK4I92w51Do=)
+           secretKey: ENC(Q4duQxpbmUXRLjsp+f13ZDJSDsb7Uq4mBozFW0E8oEyf2HdW13EJKJup/mDpZMQY+//nvHAK17Y=)
+
 logging:
     level:
+        com:
+            amazonaws:
+                util:
+                    EC2MetadataUtils: error
         org:
             hibernate:
                 type:
