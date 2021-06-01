@@ -1,13 +1,13 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.asciidoctor.convert' version '1.5.8'
-    id 'java'
+    id "org.springframework.boot" version "2.4.5"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "org.asciidoctor.convert" version "1.5.8"
+    id "java"
 }
 
-group = 'com.ehago'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+group = "com.ehago"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = "11"
 
 def queryDslVersion = "4.4.0"
 
@@ -21,40 +21,57 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('snippetsDir', file("build/generated-snippets"))
-}
-
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.4.2.Final'
-    implementation group: 'software.amazon.awssdk', name: 's3', version: '2.16.66'
-    annotationProcessor group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.2.0'
-    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.4.2.Final'
-    annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'org.postgresql:postgresql'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor group: 'org.mapstruct', name: 'mapstruct', version: '1.4.2.Final'
-    testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-    testImplementation 'org.springframework.security:spring-security-test'
-    //queryDsl
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation (
+        "org.springframework.boot:spring-boot-starter-data-jpa",
+        "org.springframework.boot:spring-boot-starter-hateoas",
+        "org.springframework.boot:spring-boot-starter-security",
+        "org.springframework.boot:spring-boot-starter-validation",
+        "org.springframework.boot:spring-boot-starter-web",
+        "org.springframework.boot:spring-boot-starter-websocket",
+        "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3",
+        "io.jsonwebtoken:jjwt:0.9.1",
+        "org.mapstruct:mapstruct:1.4.2.Final",
+        "software.amazon.awssdk:s3:2.16.66",
+        "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    )
+
+    testImplementation (
+            "org.springframework.boot:spring-boot-starter-test",
+            "org.springframework.restdocs:spring-restdocs-mockmvc",
+            "org.springframework.security:spring-security-test"
+    )
+
     annotationProcessor(
+            "org.projectlombok:lombok-mapstruct-binding:0.2.0",
+            "org.mapstruct:mapstruct-processor:1.4.2.Final",
             "javax.persistence:javax.persistence-api",
             "javax.annotation:javax.annotation-api",
-            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+            "org.projectlombok:lombok",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
+    )
+
+    testAnnotationProcessor (
+            group: "org.mapstruct", name: "mapstruct", version: "1.4.2.Final",
+            "org.projectlombok:lombok"
+    )
+
+    compileOnly (
+            "org.projectlombok:lombok"
+    )
+
+    runtimeOnly (
+            "com.h2database:h2",
+            "org.postgresql:postgresql"
+    )
+
+    developmentOnly (
+            "org.springframework.boot:spring-boot-devtools"
+    )
+
+    testCompileOnly (
+            "org.projectlombok:lombok"
+    )
 }
 
 sourceSets {
@@ -63,6 +80,10 @@ sourceSets {
             srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
         }
     }
+}
+
+ext {
+    set("snippetsDir", file("build/generated-snippets"))
 }
 
 test {
