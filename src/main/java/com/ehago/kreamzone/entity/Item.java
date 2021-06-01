@@ -22,6 +22,7 @@ public class Item extends BaseTime {
     @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_item_brand"))
     private Brand brand;
 
+    @Column(name = "kor_name")
     private String name;
 
     private String image;
