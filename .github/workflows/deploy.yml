@@ -18,8 +18,8 @@ jobs:
       - name: Build image and push to docker hub
         run: |
           ./gradlew build --exclude-task test
-          docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
-          docker push ${{ secrets.DOCKER_IMAGE_NAME }}
+          docker build -t ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }} .
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}
       - name: Remote SSH Commands
         if: ${{ success() }}
         uses: fifsky/ssh-action@v0.0.5
