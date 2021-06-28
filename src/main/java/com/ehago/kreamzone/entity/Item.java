@@ -33,9 +33,6 @@ public class Item extends BaseTime {
     @OneToMany(mappedBy = "item")
     private List<Bid> bids = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
-    private List<Bookmark> bookmarks = new ArrayList<>();
-
     private String korName;
 
     private String engName;
@@ -51,10 +48,9 @@ public class Item extends BaseTime {
     private int releasePrice;
 
     @Builder
-    private Item(Long itemId, Brand brand, List<Bookmark> bookmarks, List<Bid> bids, String korName, String engName, String image, String modelNum, String repColor, LocalDate releaseDate, int releasePrice) {
+    private Item(Long itemId, Brand brand, List<Bid> bids, String korName, String engName, String image, String modelNum, String repColor, LocalDate releaseDate, int releasePrice) {
         this.itemId = itemId;
         this.brand = brand;
-        this.bookmarks = bookmarks;
         this.bids = bids;
         this.korName = korName;
         this.engName = engName;
