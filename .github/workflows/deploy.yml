@@ -3,6 +3,9 @@ on:
   push:
     branches: [ develop ]
 
+env:
+  FULL_IMAGE_NAME: ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,18 +21,18 @@ jobs:
       - name: Build image and push to docker hub
         run: |
           ./gradlew build --exclude-task test
-          docker build -t ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }} .
+          docker build -t FULL_IMAGE_NAME .
           docker login --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_USER_PASSWORD }}
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}
-      - name: Remote SSH Commands
+          docker push FULL_IMAGE_NAME
+      - name: Connect to server and restart container
         if: ${{ success() }}
         uses: fifsky/ssh-action@v0.0.5
         with:
           command: |
-            docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
+            docker pull FULL_IMAGE_NAME
             docker stop ${{ secrets.APP_NAME }}
             docker rm ${{ secrets.APP_NAME }}
-            docker run -d --name ${{ secrets.APP_NAME }} -p 80:8080 -e ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }} ${{ secrets.DOCKER_IMAGE_NAME }}
+            docker run -d --name ${{ secrets.APP_NAME }} -p 80:8080 -e ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }} FULL_IMAGE_NAME
           host: ${{ secrets.SERVER_IP }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
