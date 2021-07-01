@@ -21,15 +21,15 @@ jobs:
       - name: Build image and push to docker hub
         run: |
           ./gradlew build --exclude-task test
-          docker build -t FULL_IMAGE_NAME .
+          docker build -t ${{ env.FULL_IMAGE_NAME }} .
           docker login --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_USER_PASSWORD }}
-          docker push FULL_IMAGE_NAME
+          docker push ${{ env.FULL_IMAGE_NAME }}
       - name: Connect to server and restart container
         if: ${{ success() }}
         uses: fifsky/ssh-action@v0.0.5
         with:
           command: |
-            docker pull FULL_IMAGE_NAME
+            docker pull ${{ env.FULL_IMAGE_NAME }}
             docker stop ${{ secrets.APP_NAME }}
             docker rm ${{ secrets.APP_NAME }}
             docker run -d --name ${{ secrets.APP_NAME }} -p 80:8080 -e ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }} FULL_IMAGE_NAME
