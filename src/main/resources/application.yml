@@ -39,6 +39,12 @@ cloud:
            accessKey: ENC(0Zr8yjPjL03oagRHQg3r6kf2lPBGzAQg1cXkYaMPJXc=)
            secretKey: ENC(cINhxzOlIg2GKbKyHOADQhDioKrbon8XWoaoE4bBly3589QzM9zE3fSucxrbiEk2f44CRkDbgFM=)
 
+jasypt:
+    encryptor:
+        password: ${ENCRYPTOR_PASSWORD}
+        algorithm: PBEWithMD5AndDES
+        iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
 logging:
     level:
         com:
