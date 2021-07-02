@@ -22,7 +22,9 @@ jobs:
         run: |
           ./gradlew build --exclude-task test
           docker build -t ${{ env.FULL_IMAGE_NAME }} .
-          docker login --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_USER_PASSWORD }}
+          docker login \
+            --username ${{ secrets.DOCKER_USER }} \
+            --password ${{ secrets.DOCKER_USER_PASSWORD }}
           docker push ${{ env.FULL_IMAGE_NAME }}
       - name: Connect to server and restart container
         if: ${{ success() }}
@@ -33,7 +35,11 @@ jobs:
             docker pull ${{ env.FULL_IMAGE_NAME }}
             docker stop ${{ secrets.IMAGE_NAME }}
             docker rm ${{ secrets.IMAGE_NAME }}
-            docker run -d --name ${{ secrets.IMAGE_NAME }} -p 80:8080 ${{ env.FULL_IMAGE_NAME }}
+            docker run \
+              -d --name ${{ secrets.IMAGE_NAME }} \
+              -p 80:8080 \
+              -e ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }} \
+              ${{ env.FULL_IMAGE_NAME }}
           host: ${{ secrets.SERVER_IP }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
