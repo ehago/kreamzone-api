@@ -7,7 +7,7 @@ env:
   FULL_IMAGE_NAME: ${{ secrets.REGISTRY }}/${{ secrets.IMAGE_NAME }}
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,10 +29,11 @@ jobs:
         uses: fifsky/ssh-action@v0.0.5
         with:
           command: |
+            export ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }}
             docker pull ${{ env.FULL_IMAGE_NAME }}
-            docker stop ${{ secrets.APP_NAME }}
-            docker rm ${{ secrets.APP_NAME }}
-            docker run -d --name ${{ secrets.APP_NAME }} -p 80:8080 -e ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }} FULL_IMAGE_NAME
+            docker stop ${{ secrets.IMAGE_NAME }}
+            docker rm ${{ secrets.IMAGE_NAME }}
+            docker run -d --name ${{ secrets.IMAGE_NAME }} -p 80:8080 ${{ env.FULL_IMAGE_NAME }}
           host: ${{ secrets.SERVER_IP }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
