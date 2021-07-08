@@ -1,8 +1,6 @@
 package com.ehago.kreamzone.dto.response.item;
 
 import com.ehago.kreamzone.dto.response.brand.BrandResponseDto;
-import com.querydsl.core.annotations.QueryProjection;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +14,6 @@ public class ItemResponseDto {
 
     private BrandResponseDto brand;
 
-//    private List<BidResponse> bids;
-
-//    private List<BookmarkResponse> bookmarks;
-
     private String korName;
 
     private String engName;
@@ -32,7 +26,6 @@ public class ItemResponseDto {
 
     private int immediatelyPurchasePrice;
 
-    @QueryProjection
     public ItemResponseDto(BrandResponseDto brand, String korName, String engName, String image, String repColor, int releasePrice, int immediatelyPurchasePrice) {
         this.brand = brand;
         this.korName = korName;

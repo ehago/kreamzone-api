@@ -19,13 +19,8 @@ public class ItemService {
 
     @Transactional
     public List<ItemResponseDto> getDroppedItems() {
-        List<Item> items = itemRepository.findAllJoinFetch();
+        List<Item> items = itemRepository.getDroppedItems();
         return itemMapper.toDtos(items);
     }
 
-    @Transactional
-    public List<ItemResponseDto> getPopularItems() {
-        List<Item> items = itemRepository.findAllJoinFetch();
-        return itemMapper.toDtos(items);
-    }
 }
