@@ -14,18 +14,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
-public class JasyptConfigTest {
+class JasyptConfigTest {
 
     @Autowired
     private StringEncryptor jasyptStringEncryptor;
 
     @Test
-    public void jasyptEncryptor_createdBean_isNotNull() {
+    void jasyptEncryptor_createdBean_isNotNull() {
         assertThat(jasyptStringEncryptor).isNotNull();
     }
 
     @Test
-    public void jasyptEncryptor_encryptAndDecrypt_isSuccess() {
+    void jasyptEncryptor_encryptAndDecrypt_isSuccess() {
         String target = "test";
         log.info("target = " + target);
 
