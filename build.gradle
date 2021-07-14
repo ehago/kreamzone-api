@@ -22,24 +22,24 @@ repositories {
 }
 
 dependencies {
-    implementation (
-        "org.springframework.boot:spring-boot-starter-data-jpa",
-        "org.springframework.boot:spring-boot-starter-hateoas",
-        "org.springframework.boot:spring-boot-starter-security",
-        "org.springframework.boot:spring-boot-starter-validation",
-        "org.springframework.boot:spring-boot-starter-web",
-        "org.springframework.boot:spring-boot-starter-websocket",
-        "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3",
-        "io.jsonwebtoken:jjwt:0.9.1",
-        "org.mapstruct:mapstruct:1.4.2.Final",
-        "software.amazon.awssdk:s3:2.16.66",
-        "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation(
+            "org.springframework.boot:spring-boot-starter-data-jpa",
+            "org.springframework.boot:spring-boot-starter-hateoas",
+//        "org.springframework.boot:spring-boot-starter-security",
+            "org.springframework.boot:spring-boot-starter-validation",
+            "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-websocket",
+            "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3",
+            "io.jsonwebtoken:jjwt:0.9.1",
+            "org.mapstruct:mapstruct:1.4.2.Final",
+            "software.amazon.awssdk:s3:2.16.66",
+            "com.querydsl:querydsl-jpa:${queryDslVersion}"
     )
 
-    testImplementation (
+    testImplementation(
             "org.springframework.boot:spring-boot-starter-test",
             "org.springframework.restdocs:spring-restdocs-mockmvc",
-            "org.springframework.security:spring-security-test"
+//            "org.springframework.security:spring-security-test"
     )
 
     annotationProcessor(
@@ -51,25 +51,25 @@ dependencies {
             "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
     )
 
-    testAnnotationProcessor (
-            group: "org.mapstruct", name: "mapstruct", version: "1.4.2.Final",
+    testAnnotationProcessor(
+            "org.mapstruct:mapstruct:1.4.2.Final",
             "org.projectlombok:lombok"
     )
 
-    compileOnly (
+    compileOnly(
             "org.projectlombok:lombok"
     )
 
-    runtimeOnly (
+    runtimeOnly(
             "com.h2database:h2",
             "org.postgresql:postgresql"
     )
 
-    developmentOnly (
+    developmentOnly(
             "org.springframework.boot:spring-boot-devtools"
     )
 
-    testCompileOnly (
+    testCompileOnly(
             "org.projectlombok:lombok"
     )
 }
