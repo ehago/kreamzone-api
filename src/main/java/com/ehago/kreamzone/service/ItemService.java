@@ -1,9 +1,7 @@
 package com.ehago.kreamzone.service;
 
 import com.ehago.kreamzone.dto.response.item.ItemResponseDto;
-import com.ehago.kreamzone.entity.Item;
-import com.ehago.kreamzone.mapper.ItemMapper;
-import com.ehago.kreamzone.repository.ItemRepository;
+import com.ehago.kreamzone.repository.ItemRepositorySupport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +12,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
 
-    private final ItemRepository itemRepository;
-    private final ItemMapper itemMapper;
+    private final ItemRepositorySupport itemRepositorySupport;
 
     @Transactional
     public List<ItemResponseDto> getDroppedItems() {
-        List<Item> items = itemRepository.getDroppedItems();
-        return itemMapper.toDtos(items);
+        return itemRepositorySupport.selectDroppedItems();
     }
 
 }

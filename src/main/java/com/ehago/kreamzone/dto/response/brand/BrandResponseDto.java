@@ -13,8 +13,6 @@ import lombok.Setter;
 @Builder
 public class BrandResponseDto {
 
-    private Long brandId;
-
     private String name;
 
     private String image;
