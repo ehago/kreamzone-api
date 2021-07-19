@@ -10,11 +10,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ItemService {
 
     private final ItemRepositorySupport itemRepositorySupport;
 
-    @Transactional
     public List<ItemResponseDto> getDroppedItems() {
         return itemRepositorySupport.selectDroppedItems();
     }

@@ -14,6 +14,8 @@ import lombok.Setter;
 @Builder
 public class ItemResponseDto {
 
+    private Long itemId;
+
     private BrandResponseDto brand;
 
     private String engName;
