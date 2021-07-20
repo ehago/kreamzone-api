@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
 
     public List<ItemResponseDto> selectDroppedItems() {
         Query nativeQuery = Objects.requireNonNull(this.getEntityManager()).createNativeQuery(
-                "SELECT br.name, br.image as brand_image, br.background, i.eng_name, i.image as item_image, b.immediately_purchase_price " +
+                "SELECT br.name, br.image as brand_image, br.background, i.item_id, i.eng_name, i.image as item_image, b.immediately_purchase_price " +
                         "FROM kream.item i " +
                         "INNER JOIN " +
                         "kream.brand br " +
@@ -45,14 +46,15 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
         return resultList
                 .stream()
                 .map(obj -> new ItemResponseDto(
+                        ((BigInteger) obj[3]).longValue(),
                         new BrandResponseDto(
                                 (String) obj[0],
                                 (String) obj[1],
                                 (String) obj[2]
                         ),
-                        (String) obj[3],
                         (String) obj[4],
-                        obj[5] != null ? Integer.parseInt((String) obj[5]) : 0)
+                        (String) obj[5],
+                        obj[6] != null ? Integer.parseInt((String) obj[6]) : 0)
                 )
                 .collect(Collectors.toList());
     }
