@@ -3,6 +3,7 @@ package com.ehago.kreamzone.repository;
 import com.ehago.kreamzone.dto.response.brand.BrandResponseDto;
 import com.ehago.kreamzone.dto.response.item.ItemResponseDto;
 import com.ehago.kreamzone.entity.Item;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,9 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static com.ehago.kreamzone.entity.QBid.bid;
+import static com.ehago.kreamzone.entity.QItem.item;
 
 @Repository
 public class ItemRepositorySupport extends QuerydslRepositorySupport {
@@ -57,6 +61,26 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
                         obj[6] != null ? Integer.parseInt((String) obj[6]) : 0)
                 )
                 .collect(Collectors.toList());
+    }
+
+    public List<Tuple> findItemIdAndMinPrice() {
+        return this.queryFactory
+                .select(bid.item.itemId, bid.price.min())
+                .from(bid)
+                .groupBy(bid.item)
+                .orderBy(bid.count().desc())
+                .limit(16)
+                .fetch();
+    }
+
+    public List<Item> findPopularItems(List<Long> itemIds) {
+        return this.queryFactory
+                .select(item)
+                .from(item)
+                .innerJoin(item.brand)
+                .fetchJoin()
+                .where(item.itemId.in(itemIds))
+                .fetch();
     }
 
 }
