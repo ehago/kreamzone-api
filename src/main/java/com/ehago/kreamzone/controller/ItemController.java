@@ -25,4 +25,10 @@ public class ItemController {
         return ResponseEntity.ok().body(items);
     }
 
+    @GetMapping("/popular")
+    public ResponseEntity<?> getPopularItems() {
+        List<ItemResponseDto> items = itemService.getPopularItems();
+        return ResponseEntity.ok().body(items);
+    }
+
 }

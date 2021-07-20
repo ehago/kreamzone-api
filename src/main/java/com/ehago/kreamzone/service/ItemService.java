@@ -19,4 +19,8 @@ public class ItemService {
         return itemRepositorySupport.selectDroppedItems();
     }
 
+    public List<ItemResponseDto> getPopularItems() {
+        return itemRepositorySupport.selectPopularItems();
+    }
+
 }
