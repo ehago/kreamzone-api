@@ -43,3 +43,4 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
