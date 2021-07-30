@@ -51,8 +51,16 @@ logging:
             amazonaws:
                 util:
                     EC2MetadataUtils: error
-#        org:
-#            hibernate:
-#                type:
-#                    descriptor:
-#                        sql: trace
+
+    file:
+        path: C:/Users/user/logtest
+
+
+    logback:
+        rollingpolicy:
+            max-file-size: 10MB
+            max-history: 30
+
+#            file-name-pattern:
+#            clean-history-on-start:
+#            total-size-cap:
