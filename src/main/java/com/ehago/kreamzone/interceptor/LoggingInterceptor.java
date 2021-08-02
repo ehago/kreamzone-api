@@ -2,7 +2,7 @@ package com.ehago.kreamzone.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,12 +21,13 @@ public class LoggingInterceptor implements HandlerInterceptor {
     private final ObjectMapper objectMapper;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        ContentCachingRequestWrapper wrappingRequest = (ContentCachingRequestWrapper) request;
+    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+        final ContentCachingRequestWrapper wrappingRequest = (ContentCachingRequestWrapper) request;
+
         log.info("Request URI : " + wrappingRequest.getRequestURI());
 
         if (wrappingRequest.getContentType() != null && wrappingRequest.getContentType().contains("application/json")) {
-            if (wrappingRequest.getContentAsByteArray() != null && wrappingRequest.getContentAsByteArray().length != 0) {
+            if (wrappingRequest.getContentAsByteArray().length != 0) {
                 log.info("Request Body : {}", objectMapper.readTree(wrappingRequest.getContentAsByteArray()));
             }
         }
@@ -35,10 +36,11 @@ public class LoggingInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        ContentCachingResponseWrapper wrappingResponse = (ContentCachingResponseWrapper) response;
+    public void postHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, ModelAndView modelAndView) throws Exception {
+        final ContentCachingResponseWrapper wrappingResponse = (ContentCachingResponseWrapper) response;
+
         if (wrappingResponse.getContentType() != null && wrappingResponse.getContentType().contains("application/json")) {
-            if (wrappingResponse.getContentAsByteArray() != null && wrappingResponse.getContentAsByteArray().length != 0) {
+            if (wrappingResponse.getContentAsByteArray().length != 0) {
                 log.info("Response Body : {}", objectMapper.readTree(wrappingResponse.getContentAsByteArray()));
             }
         }

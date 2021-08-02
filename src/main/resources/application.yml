@@ -53,14 +53,11 @@ logging:
                     EC2MetadataUtils: error
 
     file:
-        path: /tmp/log
+        name: /tmp/log/kream.log
 
 
     logback:
         rollingpolicy:
+            clean-history-on-start: true
             max-file-size: 10MB
             max-history: 30
-
-#            file-name-pattern:
-#            clean-history-on-start:
-#            total-size-cap:
