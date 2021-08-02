@@ -53,7 +53,7 @@ logging:
                     EC2MetadataUtils: error
 
     file:
-        path: C:/Users/user/logtest
+        path: /tmp/log
 
 
     logback:
