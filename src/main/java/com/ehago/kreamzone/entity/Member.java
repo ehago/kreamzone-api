@@ -11,11 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,12 +21,6 @@ public class Member extends BaseTime {
     @Id
     @GeneratedValue
     private Long memberId;
-
-    @OneToMany(mappedBy = "member")
-    private List<Card> cards = new ArrayList<>();
-
-    @OneToOne(mappedBy = "member")
-    private Account account;
 
     private String email;
 
@@ -52,10 +42,8 @@ public class Member extends BaseTime {
     private LocalDate emailCheckTokenGeneratedAt;
 
     @Builder
-    private Member(Long memberId, List<Card> cards, Account account, String email, String password, String name, String profileImage, int size, int point, Role role, String emailCheckToken, LocalDate emailCheckTokenGeneratedAt) {
+    private Member(Long memberId, String email, String password, String name, String profileImage, int size, int point, Role role, String emailCheckToken, LocalDate emailCheckTokenGeneratedAt) {
         this.memberId = memberId;
-        this.cards = cards;
-        this.account = account;
         this.email = email;
         this.password = password;
         this.name = name;
@@ -65,6 +53,13 @@ public class Member extends BaseTime {
         this.role = role;
         this.emailCheckToken = emailCheckToken;
         this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
+    }
+
+    public Member updateMemberInfo(String name, String profile) {
+        this.name = name;
+        this.profileImage = profile;
+
+        return this;
     }
 
 }
