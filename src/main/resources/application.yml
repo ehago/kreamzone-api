@@ -24,6 +24,16 @@ spring:
                 show_sql: true
                 format_sql: true
                 use_sql_comments: true
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: ENC(NV5Zx33/dxShGsFNBlDZyy7slh/zEhChluh+Hd79TY6J/Av8CCewTDyKLS2wZSZf4GF0euxAjhCBwhOcGuuqDr6ALuKxpSY7vMbDG+tgMFrDRzKpdQndRw==)
+                        client-secret: ENC(kWEg/oOmF29OhGyrMOWKWDPWjQQxWzSlA7bLsqtQiaKrxMY2nsGXdQ==)
+                        scope:
+                            - profile
+                            - email
     jackson:
         property-naming-strategy: SNAKE_CASE
 
@@ -51,6 +61,10 @@ logging:
             amazonaws:
                 util:
                     EC2MetadataUtils: error
+
+jwt:
+    key: ${JWT_KEY}
+
 #        org:
 #            hibernate:
 #                type:
