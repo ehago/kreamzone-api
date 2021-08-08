@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:11.0.12-jre
 
 EXPOSE 8080
 
