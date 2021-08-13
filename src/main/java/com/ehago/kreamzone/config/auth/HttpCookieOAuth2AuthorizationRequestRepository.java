@@ -26,16 +26,9 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
     }
 
     @Override
-    public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest, HttpServletRequest req, HttpServletResponse res) {
-        if (authorizationRequest == null) {
-            Cookies.removeCookie(req, res, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
-            Cookies.removeCookie(req, res, REDIRECT_URI_PARAM_COOKIE_NAME);
-            return;
-        }
-
-        Cookies.addCookie(res, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, Cookies.serialize(authorizationRequest), COOKIE_MAX_AGE);
+    public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest, HttpServletRequest req, HttpServletResponse res) { Cookies.addCookie(res, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, Cookies.serialize(authorizationRequest), COOKIE_MAX_AGE);
         String redirectUriAfterLogin = req.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME);
-        if (!redirectUriAfterLogin.isBlank()) {
+        if (redirectUriAfterLogin != null && !redirectUriAfterLogin.isBlank()) {
             Cookies.addCookie(res, REDIRECT_URI_PARAM_COOKIE_NAME, redirectUriAfterLogin, COOKIE_MAX_AGE);
         }
     }
