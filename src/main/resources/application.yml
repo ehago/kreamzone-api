@@ -44,20 +44,3 @@ jasypt:
         password: ${ENCRYPTOR_PASSWORD}
         algorithm: PBEWithMD5AndDES
         iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
-logging:
-    level:
-        com:
-            amazonaws:
-                util:
-                    EC2MetadataUtils: error
-
-    file:
-        name: /tmp/log/kream.log
-
-
-    logback:
-        rollingpolicy:
-            clean-history-on-start: true
-            max-file-size: 10MB
-            max-history: 30
