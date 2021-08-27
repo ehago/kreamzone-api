@@ -17,6 +17,4 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: |
-          export ENCRYPTOR_PASSWORD=${{ secrets.ENCRYPTOR_PASSWORD }}
-          ./gradlew build
+        run: ./gradlew build
