@@ -54,19 +54,3 @@ jasypt:
         password: ${ENCRYPTOR_PASSWORD}
         algorithm: PBEWithMD5AndDES
         iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
-logging:
-    level:
-        com:
-            amazonaws:
-                util:
-                    EC2MetadataUtils: error
-
-jwt:
-    key: ${JWT_KEY}
-
-#        org:
-#            hibernate:
-#                type:
-#                    descriptor:
-#                        sql: trace
