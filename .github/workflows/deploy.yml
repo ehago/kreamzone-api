@@ -38,7 +38,7 @@ jobs:
             docker run \
               -d --name ${{ secrets.IMAGE_NAME }} \
               -p 80:8080 \
-              -v var/log/${{ secrets.IMAGE_NAME }}:/tmp/log/${{ secrets.IMAGE_NAME }} \
+              -v /var/log/${{ secrets.IMAGE_NAME }}:/tmp/log/${{ secrets.IMAGE_NAME }} \
               ${{ env.FULL_IMAGE_NAME }}
           host: ${{ secrets.SERVER_IP }}
           user: ${{ secrets.SSH_USER }}
