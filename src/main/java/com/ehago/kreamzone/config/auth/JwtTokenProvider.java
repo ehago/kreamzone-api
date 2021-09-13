@@ -8,9 +8,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
@@ -20,23 +22,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public final class JwtTokenProvider {
+@Component
+public class JwtTokenProvider {
 
     static final String ACCESS_TOKEN_NAME = "access_token";
     static final String REFRESH_TOKEN_NAME = "refresh_token";
     static final int ACCESS_TOKEN_EXPIRATION_SECONDS = 60 * 30; // 30m
     static final int REFRESH_TOKEN_EXPIRATION_SECONDS = 60 * 60 * 24 * 7; // 7d
 
-    private static final Key KEY;
+    private static Key KEY;
 
-    static {
+    @Value("${jwt.key}")
+    private void setKey(String key) {
         KEY = new SecretKeySpec(
-                System.getenv("JWT_KEY").getBytes(StandardCharsets.UTF_8),
-                SignatureAlgorithm.HS256.getJcaName()
-        );
-    }
-
-    private JwtTokenProvider() {
+                key.getBytes(StandardCharsets.UTF_8),
+                SignatureAlgorithm.HS256.getJcaName());
     }
 
     public static String createAccessToken(String name, String email, Role role) {

@@ -1,72 +1,27 @@
 spring:
-    output:
-        ansi:
-            enabled: always
-    datasource:
-        driver-class-name: org.postgresql.Driver
-        url: ENC(327bqzDUVQ4LBzAkxyZd2Tpq+Qj3eWLQeZmzKxVVika5FIPSiJSsBD4geSskSLurPsQg9sz4r87S4BLax0Q8ig==)
-        username: ENC(dM9VKi4C7tkyewE+njBQ5zxXqN8zPR7m)
-        password: ENC(kpMJcVRhfpXemRf9DCX3f6L3/HsXV12a)
-        hikari:
-            auto-commit: false
-            connection-test-query: SELECT 1
-            minimum-idle: 10
-            maximum-pool-size: 50
-    jpa:
-        generate-ddl: false
-        open-in-view: false
-        show-sql: true
-        hibernate:
-            ddl-auto: validate
-        properties:
-            hibernate:
-                default_schema: kream
-                show_sql: true
-                format_sql: true
-                use_sql_comments: true
-    security:
-        oauth2:
-            client:
-                registration:
-                    google:
-                        client-id: ENC(NV5Zx33/dxShGsFNBlDZyy7slh/zEhChluh+Hd79TY6J/Av8CCewTDyKLS2wZSZf4GF0euxAjhCBwhOcGuuqDr6ALuKxpSY7vMbDG+tgMFrDRzKpdQndRw==)
-                        client-secret: ENC(kWEg/oOmF29OhGyrMOWKWDPWjQQxWzSlA7bLsqtQiaKrxMY2nsGXdQ==)
-                        scope:
-                            - profile
-                            - email
-    jackson:
-        property-naming-strategy: SNAKE_CASE
-
-cloud:
-   aws:
-       s3:
-           bucket: ENC(eT5Zlymiq7LcDjQRSwYtYX7QA8v81uh5)
-       region:
-           static: ap-northeast-2
-       stack:
-           auto: false
-       credentials:
-           accessKey: ENC(0Zr8yjPjL03oagRHQg3r6kf2lPBGzAQg1cXkYaMPJXc=)
-           secretKey: ENC(cINhxzOlIg2GKbKyHOADQhDioKrbon8XWoaoE4bBly3589QzM9zE3fSucxrbiEk2f44CRkDbgFM=)
-
-jasypt:
-    encryptor:
-        password: ${ENCRYPTOR_PASSWORD}
-        algorithm: PBEWithMD5AndDES
-        iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
+  profiles:
+    include:
+      - secret
+  output:
+    ansi:
+      enabled: always
+  jpa:
+    generate-ddl: false
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: kream
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 logging:
-    level:
-        com:
-            amazonaws:
-                util:
-                    EC2MetadataUtils: error
-
-jwt:
-    key: ${JWT_KEY}
-
-#        org:
-#            hibernate:
-#                type:
-#                    descriptor:
-#                        sql: trace
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
